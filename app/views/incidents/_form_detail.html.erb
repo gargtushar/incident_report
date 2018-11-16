@@ -1,0 +1,72 @@
+<div class = "box-body">
+  <%= form_for @incident, local: true do |f| %>
+    <% if incident.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(incident.errors.count, "error") %> prohibited this incident from being saved:</h2>
+
+        <ul>
+        <% incident.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-header">
+      <h4>Lincoln High School</h4>
+    </div>
+    <div class="form-group">
+      <%= f.label :incident_type_id, "Type of Incident" %>
+      <%= f.collection_select :incident_type_id, @incident_types,:id,:title, include_blank: true, :class => "form-control" %>
+    </div>
+    
+    <h3>Your details</h3>
+    <div class="form-group">
+      <%= f.label :user_name,"Name" %>
+      <%= f.text_field :user_name, :class => "form-control", :required => true%>
+    </div>
+    <div class="form-group">
+      <%= f.label :email,"Email" %>
+      <%= f.text_field :email, :class => "form-control", :required => true%>
+    </div>
+    <div class = "form-group">
+      <%= f.label :phone, "Phone" %>
+      <%= f.number_field :phone, :class => "form-control", :required => true %>
+    </div>
+      <div class="form-group">
+      <%= f.label :user_role %>
+      <%= f.select :user_role, ['student', 'teacher','other staff','parent','community member'], :class => "form-control", :required => true%>
+    </div>
+    
+     <div class="form-group">
+      <%= f.label :people,"People involved" %>
+      <%= f.text_field :people, placeholder: "Name and other details of people involved (student, teacher, staff, parent, 
+  grade level)", :class => "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :other_observers,"Other observers if any" %>
+      <%= f.text_field :other_observers, placeholder: "Name and details", :class => "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :date_time_observed,"Date/ Time observed" %>
+      <%= f.text_field :date_time_observed, :class => "form-control", :required => true %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :location %>
+      <%= f.select :location, ['On school campuses and grounds', 'During transportation to and from school','At school-sponsored events','More details'], :class => "form-control", :required => true%>
+    </div>
+    
+     <div class="form-group">
+      <%= f.label :description,"Describe issue/incident" %>
+      <%= f.text_area :description, cols: 60, rows: 15, :class => "form-control", :required => true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.button :submit, class: 'btn btn-primary' do %>
+        Submit
+      <% end %>
+    </div>
+  <% end %>
+</div>

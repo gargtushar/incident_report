@@ -1,0 +1,27 @@
+<div class="box-body">
+  <%= form_for @incident, local: true do |f| %>
+    <% if incident.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(incident.errors.count, "error") %> prohibited this incident from being saved:</h2>
+        <ul>
+        <% incident.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <h4>Lincoln High School</h4>
+    </div>
+     <div class="form-group">
+      <%= f.label :description,"Describe issue/incident", :class => "form-group" %>
+      <%= f.text_area :description, :class => "form-control", cols: 60, rows: 15 %>
+    </div>
+
+    <div class="form-group">
+      <%= f.button :submit, class: 'btn btn-primary' do %>
+        Submit
+      <% end %>
+    </div>
+  <% end %>
+</div>
